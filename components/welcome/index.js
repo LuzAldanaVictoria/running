@@ -1,9 +1,14 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import {StyleSheet, Text, View, Image} from 'react-native';
 import CustomButton from '../button';
 import logo from '../../assets/logo.png';
+import SignIn from "../sign-in";
 
-const Welcome = () => {
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
+
+
+const Welcome = ({navigation}) => {
     return (
         <View style={styles.welcome}>
             <View style={styles.main}>
@@ -16,24 +21,30 @@ const Welcome = () => {
                 </Text>
             </View>
             <View>
-                <CustomButton 
+                <CustomButton
                     title={'Iniciar sesión'}
                     color={'main'}
+                    navigation={navigation}
+                    onPress={"SignIn"}
                 />
-                <CustomButton 
+                <CustomButton
                     title={'Registrarse'}
-                    color={'secondary'}
+                    color={'secondary'} navigation={navigation} onPress={"SignIn"}
+                />
+                <CustomButton
+                    title={'Mapa'}
+                    color={'secondary'} color={'tertiary'} navigation={navigation} onPress={"Mapa"}
                 />
             </View>
         </View>
     );
-  }
-  
-  const styles = StyleSheet.create({
+}
+
+const styles = StyleSheet.create({
     welcome: {
-      flex: 1,
-      alignItems: 'center',
-      justifyContent: 'flex-start',
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'flex-start',
     },
     text: {
         color: '#262626',
@@ -45,7 +56,10 @@ const Welcome = () => {
     },
     main: {
         flex: 0.8,
+    },
+    marginTop: {
+        marginTop: 10
     }
-  });
+});
 
-  export default Welcome;
+export default Welcome;

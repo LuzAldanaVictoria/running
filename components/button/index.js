@@ -1,18 +1,27 @@
 import React from 'react';
-import { StyleSheet, Button, View, Text } from 'react-native';
+import {StyleSheet, Pressable, View, Text} from 'react-native';
 
-const CustomButton = ({ title, color }) => {
-    const buttonStyle = (color === 'main') ? styles.main : styles.secondary;
+const CustomButton = ({navigation, onPress, title, color}) => {
+    console.log("OnPress equals: ", onPress);
+    let buttonStyle;
+    if (color === 'main') {
+        buttonStyle = styles.main;
+    } else if (color === 'secondary') {
+        buttonStyle = styles.secondary;
+    } else {
+        buttonStyle = styles.tertiary;
+    }
     return (
         <View style={buttonStyle}>
             {/* Pendiente: sumar al Text el callback del onClick del texto según la función que se mande como parámetro */}
-            <Text style={styles.text}>{title}</Text>
+            <Pressable title={title} onPress={() => navigation.navigate(onPress)}><Text
+                style={styles.text}>{title}</Text></Pressable>
         </View>
     );
-  }
+}
 
 
- const styles = StyleSheet.create({
+const styles = StyleSheet.create({
     main: {
         alignItems: 'center',
         justifyContent: 'center',
@@ -23,8 +32,8 @@ const CustomButton = ({ title, color }) => {
         width: 300,
         height: 55,
         marginBottom: 16,
-      },
-      secondary: {
+    },
+    secondary: {
         alignItems: 'center',
         justifyContent: 'center',
         padding: 16,
@@ -33,11 +42,23 @@ const CustomButton = ({ title, color }) => {
         borderWidth: 2,
         width: 300,
         height: 55,
-      },
-      text: {
+    },
+    tertiary: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: 16,
+        color: '#262626',
+        borderRadius: 8,
+        borderWidth: 2,
+        width: 300,
+        height: 55,
+        marginTop: 10
+    },
+    text: {
         fontSize: 15,
-        fontWeight: "bold"
-      }
-  });
+        fontWeight: "bold",
+        color: "black"
+    }
+});
 
-  export default CustomButton;
+export default CustomButton;
